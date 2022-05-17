@@ -66,6 +66,7 @@ def train():
     game = PlayerCar(6,6)
     while True:
         # get old state
+        # state_old = game.get_agent_state()
         state_old = torch.from_numpy(game.get_agent_state()).unsqueeze(0)
 
         # get move
@@ -74,6 +75,7 @@ def train():
         # perform move and get new state
         reward, done, score = game.play_step(final_move)
         state_new = torch.from_numpy(game.get_agent_state()).unsqueeze(0)
+        # state_new = game.get_agent_state()
 
         # train short memory
         agent.train_short_memory(state_old, final_move, reward, state_new, done)

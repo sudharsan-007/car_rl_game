@@ -66,13 +66,13 @@ class QTrainer:
         reward = torch.tensor(reward, dtype=torch.float)
         # (n, x)
 
-        if len(state.shape) == 1:
+        if state.shape[0] == 1:
             # (1, x)
-            state = torch.unsqueeze(state, 0)
+            # state = torch.unsqueeze(state, 0)
             next_state = torch.unsqueeze(next_state, 0)
             action = torch.unsqueeze(action, 0)
             reward = torch.unsqueeze(reward, 0)
-            done = [done, ]
+            done = (done, )
 
         # 1: predicted Q values with current state
         pred = self.model(state)
